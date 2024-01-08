@@ -71,14 +71,14 @@ createUser({ body }, res) {
 
 deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.id })
-    .then((dbUser Data) => {
+    .then((dbUserData) => {
     if (!dbUserData) {
     return res.status(404).json({ message: "No user with this id!" });
     }
     
     // BONUS "Test" getting rid of user Ids and thoughts with deletion 
     
-    return Thought.deleteMant({ _ id: { $in: dbUserData.thoughts } });
+    return Thought.deleteMant({ _id: { $in: dbUserData.thoughts } });
     })
     .then(() => {
     res.json({ message: "User and associated thoughts deleted!" });
@@ -95,7 +95,7 @@ addFriend({ params }, res) {
     { new: true, runValidators: true }
     )
     .then((dbUserData) => {
-    of (!dbUserData) {
+    if (!dbUserData) {
     res.status(404).json({ message: "No user with this id" });
     return;
     }
@@ -104,3 +104,22 @@ addFriend({ params }, res) {
     .catch((err) => res.json(err));
     },
     
+    // Delete friend //
+removeFriend({ params }, res) {
+    User.findOneandUpdate(
+        { _id: params.userId },
+        { $pull: { friends: params.friendId } },
+        { new: true, runValidators: true }
+        )
+        .then((dbUserData) => {
+        if (!dbUserData) {
+        res.status(404).json({ message: "No user with this id" });
+        return;
+        }
+        res.json(dbUserData);
+        })
+        .catch((err) => res.json(err));
+        },
+    };
+
+    module.exports = userController;
