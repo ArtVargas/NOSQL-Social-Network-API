@@ -75,7 +75,7 @@ updateThought({ params, body }, res) {
     }
     res.json(dbThoughtData);
     })
-    .catch(err) => res.json(err));
+    .catch((err) => res.json(err));
     },
 
     // Delete Thought //
