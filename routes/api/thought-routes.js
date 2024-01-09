@@ -8,7 +8,6 @@ updateThought,
 deleteThought,
 addReaction,
 removeReaction,
-removeReaction,
 
 } = require("../../controllers/thought-controller");
 

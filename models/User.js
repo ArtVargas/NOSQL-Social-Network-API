@@ -15,7 +15,7 @@ type: String,
 unique: true,
 trim: true,
 required: "Username is Required",
-match: [], //Fix later //
+match: [], 
 
 },
 thoughts: [
